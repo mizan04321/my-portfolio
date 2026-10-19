@@ -1,0 +1,191 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import SlatsCover from '../components/SlatsCover.astro';
+
+// ============================================================================
+// 💡 HOW TO ADD A NEW PROJECT:
+// Simply add a new object to this array with ONLY 3 things:
+//   1. name: "Your Project Name"
+//   2. description: "A concise 1-2 sentence description"
+//   3. liveUrl: "https://your-project-link.com"
+// That's it! No logos, tags, or stats required.
+// ============================================================================
+
+interface VibeProject {
+  name: string;
+  description: string;
+  liveUrl: string;
+}
+
+const projects: VibeProject[] = [
+  {
+    name: "Bidvers",
+    description: "Core platform and API behind a real-time hotel upgrade bidding marketplace",
+    liveUrl: "https://bidvers.com"
+  },
+  {
+    name: "Learn Laravel",
+    description: "Self-learning resources to level up your Laravel skills: tutorials, ebooks, blogs and courses",
+    liveUrl: "https://learnlaravel.com"
+  },
+  {
+    name: "Invo",
+    description: "Effortless invoice management, no sign-up needed",
+    liveUrl: "https://invo.app"
+  },
+  {
+    name: "Prompt Filler",
+    description: "Fill prompt placeholders as easily as filling a form",
+    liveUrl: "https://promptfiller.com"
+  },
+  {
+    name: "AI Entity & Schema Generator",
+    description: "Automated schema builder extracting brand knowledge graphs and structuring JSON-LD for AI Overviews & answer engines",
+    liveUrl: "https://schema-generator-demo.vercel.app"
+  },
+  {
+    name: "Local Falcon Rank Grid Visualizer",
+    description: "Interactive geo-grid dashboard displaying Google Maps 3-Pack rank heatmaps and competitor positioning",
+    liveUrl: "https://rank-grid-demo.vercel.app"
+  }
+];
+---
+
+<BaseLayout
+  title="Vibe Coding Projects · Md. Mizanur Rahaman"
+  description="Products I've designed, built and shipped, plus the open source work behind them."
+  currentPath="/vibe-coding"
+>
+  <Header />
+  <SlatsCover />
+
+  <!-- Page Header matching Nahian style -->
+  <section class="px-4 pt-8 text-center sm:px-6 lg:px-8">
+    <h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100">
+      Projects
+    </h1>
+    <p class="mt-2 text-sm sm:text-base text-zinc-600 dark:text-zinc-400 max-w-xl mx-auto">
+      Products I’ve designed, built and shipped, plus the open source work behind them.
+    </p>
+  </section>
+
+  <!-- Navigation Tabs -->
+  <nav class="mt-8 border-b border-zinc-200 dark:border-zinc-800 px-4 sm:px-6 lg:px-8" aria-label="Profile tabs">
+    <ul class="flex flex-wrap justify-center gap-x-6 gap-y-2 sm:gap-x-8">
+      <li>
+        <a href="/" class="relative block py-3 text-xs sm:text-sm font-semibold tracking-wide uppercase text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">
+          Resume
+        </a>
+      </li>
+      <li>
+        <a href="/work" class="relative block py-3 text-xs sm:text-sm font-semibold tracking-wide uppercase text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">
+          Case Studies &amp; Results
+        </a>
+      </li>
+      <li>
+        <a href="/services" class="relative block py-3 text-xs sm:text-sm font-semibold tracking-wide uppercase text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">
+          Services
+        </a>
+      </li>
+      <li>
+        <a href="/vibe-coding" class="relative block py-3 text-xs sm:text-sm font-semibold tracking-wide uppercase text-emerald-700 dark:text-emerald-400 border-b-2 border-emerald-600 dark:border-emerald-400">
+          Vibe Coding
+        </a>
+      </li>
+      <li>
+        <a href="/contact" class="relative block py-3 text-xs sm:text-sm font-semibold tracking-wide uppercase text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">
+          Contact
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- Projects Grid -->
+  <div class="px-4 py-10 sm:px-6 lg:px-8 space-y-10">
+    <div class="grid gap-6 sm:grid-cols-2">
+      {projects.map((project) => (
+        <a
+          href={project.liveUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          data-sfx="pop"
+          class="project-card p-3 sm:p-3.5 group cursor-pointer focus:outline-none focus:ring-2 focus:ring-emerald-500"
+          title={`Visit ${project.name}`}
+        >
+          <!-- Top Banner with Emerald Glow & Dot Matrix -->
+          <div class="project-banner">
+            <!-- Center Squircle Badge: Auto-shows short brand name (like Invo) or clean code braces { } (like Prompt Filler) -->
+            <div class="project-logo-badge">
+              {project.name.length <= 5 && !project.name.includes(' ') ? (
+                <span class="font-black text-xl tracking-tight text-zinc-900 dark:text-white select-none">
+                  {project.name}
+                </span>
+              ) : (
+                <span class="font-mono text-2xl font-bold text-zinc-900 dark:text-white select-none">
+                  &#123; &#125;
+                </span>
+              )}
+            </div>
+          </div>
+
+          <!-- Bottom Details Area (Only Project Name, Description, and Live URL) -->
+          <div class="p-3 sm:p-3.5 flex-1 flex flex-col justify-between space-y-3">
+            <div>
+              <div class="flex items-center justify-between gap-2">
+                <h2 class="text-base font-bold text-zinc-900 dark:text-zinc-100 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
+                  {project.name}
+                </h2>
+                <svg class="size-4 text-zinc-400 dark:text-zinc-500 opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="7" y1="17" x2="17" y2="7"></line>
+                  <polyline points="7 7 17 7 17 17"></polyline>
+                </svg>
+              </div>
+
+              <p class="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 mt-1 leading-relaxed line-clamp-2">
+                {project.description}
+              </p>
+            </div>
+
+            <!-- Bottom Row: Live Project URL Link (Tags, Stars, and GitHub completely removed) -->
+            <div class="pt-2 flex items-center justify-between text-xs text-zinc-500 dark:text-zinc-400 border-t border-zinc-100 dark:border-zinc-800/80">
+              <span class="font-mono text-[11px] truncate max-w-[200px] text-zinc-500 dark:text-zinc-400">
+                {project.liveUrl.replace(/^https?:\/\//, '')}
+              </span>
+              <span class="inline-flex items-center gap-1 font-semibold text-emerald-700 dark:text-emerald-400 group-hover:translate-x-0.5 transition-transform">
+                <span>Visit Live</span>
+                <svg class="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                  <polyline points="15 3 21 3 21 9"/>
+                  <line x1="10" y1="14" x2="21" y2="3"/>
+                </svg>
+              </span>
+            </div>
+          </div>
+        </a>
+      ))}
+    </div>
+
+    <!-- Easy Add Helper Guide Card -->
+    <div class="card-raised p-6 sm:p-7 space-y-3">
+      <div class="flex items-center gap-2 text-emerald-700 dark:text-emerald-400 font-bold text-sm">
+        <svg class="size-4.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/>
+          <line x1="12" y1="8" x2="12" y2="12"/>
+          <line x1="12" y1="16" x2="12.01" y2="16"/>
+        </svg>
+        <span>How to Add Your Own Projects</span>
+      </div>
+
+      <p class="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400">
+        Open <code class="px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 font-mono text-xs text-emerald-700 dark:text-emerald-400">src/pages/vibe-coding.astro</code> and add only the 3 fields to the <code class="px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 font-mono text-xs">projects</code> array:
+      </p>
+
+      <pre class="p-3.5 rounded-xl bg-zinc-950 text-zinc-200 font-mono text-xs overflow-x-auto border border-zinc-800"><code>&#123;
+  name: "Your Project Name",
+  description: "Short description of what the project does...",
+  liveUrl: "https://your-project-link.com"
+&#125;</code></pre>
+    </div>
+  </div>
+</BaseLayout>
